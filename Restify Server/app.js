@@ -128,7 +128,7 @@ server.del(apiURL + 'contacts/:id/*', function (req, res) {
 
     // Remove photo from disk
     var fs = require('fs');
-    var filePath = req.params['*'];
+    var filePath = req.params['*']; // file path should be parameter after id 
     fs.unlink(filePath, function(err) {
       if(err){
         console.log(err);
