@@ -1,13 +1,8 @@
 const config  = require('./config'),
       restify = require('restify'),
       mysql = require('mysql'),
-      contactsRoutes = require('./routes/contacts.server.route')
-      
-const multer = require('multer');
-const upload = multer({dest: 'uploads/'});
-var mv = require('mv');
-      
-var connection = config.db.get;
+      mv = require('mv')
+
 
 /**
  * Initialize Server
@@ -22,15 +17,21 @@ server.use(restify.plugins.acceptParser(server.acceptable));
 server.use(restify.plugins.queryParser());
 server.use(restify.plugins.bodyParser());
 
-// server.use('/api', contactsRoutes);
+var connection = config.db.get;
+
+
+/**
+ * Routing
+ * TODO: Move routing to its own folder
+ */
 
 const apiURL = '/api/'
 
-//rest api to get all results
 server.get(apiURL, function (req, res) {
    return res.end('API Working!');
 });
 
+// Get all contacts
 server.get(apiURL + 'contacts', function (req, res) {
    connection.query('SELECT * FROM contacts', function (error, results, fields) {
 	  if (error) throw error;
@@ -38,6 +39,7 @@ server.get(apiURL + 'contacts', function (req, res) {
 	});
 });
 
+// Get contact by ID
 server.get(apiURL + 'contacts/:id', function (req, res) {
    connection.query('SELECT * FROM contacts WHERE id=?', [req.params.id], function (error, results, fields) {
 	  if (error) throw error;
@@ -45,13 +47,14 @@ server.get(apiURL + 'contacts/:id', function (req, res) {
 	});
 });
 
+// Create contact
 server.post(apiURL + 'contacts', function (req, res, next) {
-  
+
   var postData = req.body;
   var newPath = null
-  
+
   //TODO Create checks for image
-  
+
   // create new path for uploaded file
   if (req.files.image) {
     const nameArr = req.files.image.type.split('/')
@@ -59,7 +62,7 @@ server.post(apiURL + 'contacts', function (req, res, next) {
     var file = req.files.image;
     var img_name=file.name;
     newPath = `uploads/${img_name}_${new Date().getTime()}.${extension}`;
-    
+
     // NPM Module to help store files
     mv(file.path, newPath, {
       mkdirp: true
@@ -71,10 +74,10 @@ server.post(apiURL + 'contacts', function (req, res, next) {
       }
     });
   }
-  
+
   var params = [postData.first_name, postData.last_name, postData.phone_number, newPath] // callback function in query below must be second
   connection.query('INSERT INTO contacts SET first_name=?, last_name=?, phone_number=?, image=?', params, function (error, results, fields) {
-     
+
 	  if (error) throw error;
     connection.query('SELECT * FROM contacts WHERE `id`= LAST_INSERT_ID()', function (error, results, fields) {
       res.end(JSON.stringify(results));
@@ -82,11 +85,12 @@ server.post(apiURL + 'contacts', function (req, res, next) {
 	});
 });
 
+// Edit contact
 server.put(apiURL + 'contacts', function (req, res) {
   var newPath = req.body.image
-  
+
   //TODO Create checks for image
-  
+
   // create new path for uploaded file
   if (req.files.image) {
     const nameArr = req.files.image.type.split('/')
@@ -94,7 +98,7 @@ server.put(apiURL + 'contacts', function (req, res) {
     var file = req.files.image;
     var img_name=file.name;
     newPath = `uploads/${img_name}_${new Date().getTime()}.${extension}`;
-    
+
     // NPM Module to help store files
     mv(file.path, newPath, {
       mkdirp: true
@@ -106,7 +110,7 @@ server.put(apiURL + 'contacts', function (req, res) {
       }
     });
   }
-  
+
   const params = [req.body.first_name, req.body.last_name, req.body.phone_number, newPath, req.body.id]
    connection.query('UPDATE contacts SET first_name=?, last_name=?, phone_number=?, image=? WHERE id=?', params, function (error, results, fields) {
 	  if (error) throw error;
@@ -116,24 +120,26 @@ server.put(apiURL + 'contacts', function (req, res) {
 	});
 });
 
+// Delete contact
 server.del(apiURL + 'contacts/:id/*', function (req, res) {
    connection.query('DELETE FROM `contacts` WHERE `id`=?', [req.params.id], function (error, results, fields) {
-    
+
     if (error) throw error;
-    
+
     // Remove photo from disk
     var fs = require('fs');
-    var filePath = req.params['*']; 
+    var filePath = req.params['*'];
     fs.unlink(filePath, function(err) {
       if(err){
         console.log(err);
       }
     });
-    
+
     res.end(JSON.stringify(results));
   });
 });
 
+// Endpoint to statically serve profile pictures
 server.get('/uploads/*', restify.plugins.serveStatic({
   directory: __dirname,
   default: 'index.html'
