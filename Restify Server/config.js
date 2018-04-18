@@ -12,7 +12,7 @@ module.exports = {
         get : mysql.createConnection({
 			host     : 'localhost',
 			user     : 'root',
-			password : '',
+			password : '', // SET YOUR MYSQL PASSWORD IF NECESSARY
 			database : 'contacts'
 		})
     }
