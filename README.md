@@ -4,6 +4,14 @@
 ---
 ##### CRUD app built using React.js and Redux on the frontend, Node.js and mySQL on the backend.
 ---
+#### Functionality:
+1. Ability to Create a contact
+2. Ability to Read contacts
+3. Edit contacts
+4. Delete contacts
+
+###### All data is persisted on the back end via mySQL and Node.js.
+---
 Install:
 1. Download the zip file
 2. Make sure you have mysql installed
@@ -12,11 +20,11 @@ Install:
 5. Run `npm install` on both tabs
 6. Run `npm start` on both tabs
 
-# TODO
+#### TODO
 - [ ] Add ability to search
 - [ ] Sort address book
 
-# Notes
+#### Notes
 Currently I am using a few dependencies:
 
 - [MV](https://www.npmjs.com/package/mv) - a handy utility to help move and save files
