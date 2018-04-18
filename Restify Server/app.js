@@ -18,7 +18,21 @@ server.use(restify.plugins.queryParser());
 server.use(restify.plugins.bodyParser());
 
 var connection = config.db.get;
-
+connection.connect(function(err) {
+  if (err) throw err;
+  var sql = 'CREATE TABLE IF NOT EXISTS `contacts` ('
+  + '`id` int(11) unsigned NOT NULL AUTO_INCREMENT,'
+  + '`first_name` varchar(30) NOT NULL DEFAULT "",'
+  + '`last_name` varchar(30) NOT NULL DEFAULT "",'
+  + '`image` varchar(255) DEFAULT "",'
+  + '`phone_number` varchar(30) NOT NULL DEFAULT "",'
+  + '`description` varchar(50) DEFAULT NULL,'
+  + 'PRIMARY KEY (`id`)'
+  +  ') ENGINE=InnoDB AUTO_INCREMENT=132 DEFAULT CHARSET=utf8'
+  connection.query(sql, function (err, result) {
+    if (err) throw err;
+  });
+});
 
 /**
  * Routing
