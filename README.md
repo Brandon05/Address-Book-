@@ -1,6 +1,6 @@
 # Address Book
 ---
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/150px-React-icon.svg.png" width="130" height="100"><img src="https://www.mysql.com/common/logos/includes-mysql-167x86.png" width="130" height="100"><img src="https://raw.githubusercontent.com/reactjs/redux/master/logo/logo.png" width="130" height="100"><img src="https://github.com/Brandon05/Address-Book-/blob/master/nodejs-new-pantone-black.ai" width="130" height="100">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/150px-React-icon.svg.png" width="130" height="100"><img src="https://www.mysql.com/common/logos/includes-mysql-167x86.png" width="130" height="100"><img src="https://raw.githubusercontent.com/reactjs/redux/master/logo/logo.png" width="130" height="100"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/256px-Node.js_logo.svg.png" width="130" height="100">
 ---
 ##### CRUD app built using React.js and Redux on the frontend, Node.js and mySQL on the backend.
 ---
