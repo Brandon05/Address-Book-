@@ -3,6 +3,7 @@
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/150px-React-icon.svg.png" width="200" height="150"><img src="https://www.mysql.com/common/logos/includes-mysql-167x86.png" width="180" height="120"><img src="https://raw.githubusercontent.com/reactjs/redux/master/logo/logo.png" width="180" height="140"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/256px-Node.js_logo.svg.png" width="180" height="130">
 ---
 ##### CRUD app built using React.js and Redux on the frontend, Node.js and mySQL on the backend.
+![Video of App](https://vimeo.com/265299862)
 ---
 #### Functionality:
 1. Ability to Create a contact
