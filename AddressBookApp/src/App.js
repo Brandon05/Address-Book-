@@ -21,7 +21,6 @@ class App extends Component {
   }
 }
 
-
 App.propTypes = {
   store: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired

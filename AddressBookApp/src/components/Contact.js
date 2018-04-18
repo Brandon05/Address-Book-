@@ -19,6 +19,8 @@ export default class Contact extends React.Component {
         <div>
          <h3>{contactState.contact.first_name}</h3>
          <p>{contactState.contact.last_name}</p>
+         <p>{contactState.contact.phone_number}</p>
+         <p>{contactState.contact.description}</p>
         </div>
        }
       </div>

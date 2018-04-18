@@ -13,8 +13,6 @@ export default class App extends React.Component {
   toggleAddContact(event) {
     event.preventDefault();
     this.props.mappedToggleAddContact();
-    console.log(this.props.mappedAppState.showAddContact)
-
   }
 
   addContact(event) {
@@ -26,6 +24,7 @@ export default class App extends React.Component {
       data.append('phone_number', form.contactPhoneNumber.value);
       data.append('last_name', form.contactLastName.value);
       data.append('image', form.contactProfilePicture.files[0]);
+      data.append('description', form.contactDescription.value);
       this.props.mappedAddContact(data);
       this.props.mappedShowSuccessMessage();
     }
@@ -42,8 +41,6 @@ export default class App extends React.Component {
 
   render() {
     const appState = this.props.mappedAppState;
-    const addContactButton = <Button fluid color='green' style={{borderRadius: 0}} onClick={this.toggleAddContact}>Add a Contact</Button>
-    console.log(appState.showAddContact)
     return(
       <div>
         <Header as='h1' size='huge' icon textAlign='center' style={{marginTop: 15}} >
@@ -56,7 +53,13 @@ export default class App extends React.Component {
           <Button fluid color='green' style={{borderRadius: 0}} onClick={this.toggleAddContact}>Add a Contact</Button>
         </div>
         <div className="container">
-          <AddContactForm showAddContact={appState.showAddContact} hideAddContact={this.toggleAddContact} addContact={this.addContact} success={appState.showSuccessMessage} error={appState.showErrorMessage} />
+          <AddContactForm
+            showAddContact={appState.showAddContact}
+            hideAddContact={this.toggleAddContact}
+            addContact={this.addContact}
+            success={appState.showSuccessMessage}
+            error={appState.showErrorMessage}
+          />
           { /* Each Smaller Components */}
             {this.props.children}
         </div>

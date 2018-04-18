@@ -75,8 +75,8 @@ server.post(apiURL + 'contacts', function (req, res, next) {
     });
   }
 
-  var params = [postData.first_name, postData.last_name, postData.phone_number, newPath] // callback function in query below must be second
-  connection.query('INSERT INTO contacts SET first_name=?, last_name=?, phone_number=?, image=?', params, function (error, results, fields) {
+  var params = [postData.first_name, postData.last_name, postData.phone_number, postData.description, newPath] // callback function in query below must be second
+  connection.query('INSERT INTO contacts SET first_name=?, last_name=?, phone_number=?, description=?, image=?', params, function (error, results, fields) {
 
 	  if (error) throw error;
     connection.query('SELECT * FROM contacts WHERE `id`= LAST_INSERT_ID()', function (error, results, fields) {
@@ -111,8 +111,8 @@ server.put(apiURL + 'contacts', function (req, res) {
     });
   }
 
-  const params = [req.body.first_name, req.body.last_name, req.body.phone_number, newPath, req.body.id]
-   connection.query('UPDATE contacts SET first_name=?, last_name=?, phone_number=?, image=? WHERE id=?', params, function (error, results, fields) {
+  const params = [req.body.first_name, req.body.last_name, req.body.phone_number, req.body.description, newPath, req.body.id]
+   connection.query('UPDATE contacts SET first_name=?, last_name=?, phone_number=?, description=?, image=? WHERE id=?', params, function (error, results, fields) {
 	  if (error) throw error;
     connection.query('SELECT * FROM contacts WHERE `id`=?', req.body.id, function (error, results, fields) {
       res.end(JSON.stringify(results));
@@ -128,7 +128,7 @@ server.del(apiURL + 'contacts/:id/*', function (req, res) {
 
     // Remove photo from disk
     var fs = require('fs');
-    var filePath = req.params['*']; // file path should be parameter after id 
+    var filePath = req.params['*']; // file path should be parameter after id
     fs.unlink(filePath, function(err) {
       if(err){
         console.log(err);

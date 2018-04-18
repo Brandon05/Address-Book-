@@ -24,6 +24,7 @@ export default class Contacts extends React.Component {
       data.append('first_name', form.contactFirstName.value);
       data.append('phone_number', form.contactPhoneNumber.value);
       data.append('last_name', form.contactLastName.value);
+      data.append('description', form.contactDescription.value);
 
       if(form.contactProfilePicture.files[0]) {
         data.append('image', form.contactProfilePicture.files[0]);
@@ -108,14 +109,24 @@ export default class Contacts extends React.Component {
               <Icon name="phone" />
               <Header.Content>
                   {contact.phone_number}
-                  <Header.Subheader>Work Phone</Header.Subheader>
+                  <Header.Subheader>{contact.description}</Header.Subheader>
               </Header.Content>
             </Header>
           </Table.Cell>
-          <Table.Cell className="textCenter"><Button icon onClick={() => this.showEditModal(contact)} size="small"><Icon name="pencil" /></Button></Table.Cell>
-           <Table.Cell className="textCenter"><Button icon onClick={() => this.showDeleteModal(contact)} size="small"><Icon name="trash" /></Button></Table.Cell>
-           <Table.Cell className="textCenter"><Link to={`/${contact.id}`}>View Details</Link> </Table.Cell>
-           </Table.Row> )
+          <Table.Cell
+            className="textCenter">
+            <Button icon onClick={() => this.showEditModal(contact)} size="small">
+            <Icon name="pencil" /></Button>
+          </Table.Cell>
+          <Table.Cell className="textCenter">
+           <Button icon onClick={() => this.showDeleteModal(contact)} size="small">
+           <Icon name="trash" /></Button>
+          </Table.Cell>
+          <Table.Cell
+            className="textCenter">
+            <Link to={`/${contact.id}`}>View Details</Link>
+          </Table.Cell>
+          </Table.Row> )
         }
         </Table.Body>
         </Table>

@@ -6,6 +6,10 @@ export const toggleAddContact = () => {
   }
 }
 
+/*
+* Fetch Actions
+*/
+
 export const fetchContacts = () => {
   return (dispatch) => {
     dispatch(fetchContactsRequest());
@@ -86,6 +90,10 @@ export const fetchContactByIdFailure = (error) => {
   }
 }
 
+/*
+* Add Contact Actions
+*/
+
 export const addContact = (contactToAdd) => {
   return (dispatch) => {
     dispatch(addContactRequest());
@@ -133,6 +141,10 @@ export const hideAddContactForm = () => {
     type: 'HIDE_ADD_CONTACT_FORM'
   }
 }
+
+/*
+* Edit Actions
+*/
 
 export const editContact = (contactToEdit) => {
   return (dispatch) => {
@@ -200,6 +212,10 @@ export const showErrorMessage = () => {
     type: 'SHOW_ERROR_MESSAGE'
   }
 }
+
+/*
+* Delete Actions
+*/
 
 export const showDeleteModal = (contact) => {
   return {

@@ -12,6 +12,11 @@ const INITIAL_STATE = {
 
 const contactReducer = (currentState = INITIAL_STATE, action) => {
   switch (action.type) {
+
+    /*
+    * Fetch States
+    */
+
     case 'FETCH_CONTACTS_REQUEST':
           return {
             ...currentState,
@@ -92,6 +97,11 @@ const contactReducer = (currentState = INITIAL_STATE, action) => {
             showEditModal: false,
             contactToEdit: null,
           }
+
+          /*
+          * Add States
+          */
+
     case 'ADD_CONTACT_REQUEST':
           return {
             ...currentState,
@@ -148,8 +158,12 @@ const contactReducer = (currentState = INITIAL_STATE, action) => {
             contactToDelete: null,
             showEditModal: false,
             contactToEdit: null,
-            newTodo: null
           }
+
+          /*
+          * Edit Cases
+          */
+
     case 'SHOW_EDIT_CONTACT_FORM':
           return {
             ...currentState,
@@ -162,7 +176,6 @@ const contactReducer = (currentState = INITIAL_STATE, action) => {
             contactToDelete: null,
             showEditModal: true,
             contactToEdit: action.contact,
-            newTodo: null,
             showSuccessMessage: false,
             showErrorMessage: false
           }
@@ -178,7 +191,6 @@ const contactReducer = (currentState = INITIAL_STATE, action) => {
             contactToDelete: null,
             showEditModal: false,
             contactToEdit: null,
-            newTodo: null,
             showSuccessMessage: false,
             showErrorMessage: false
           }
@@ -186,7 +198,7 @@ const contactReducer = (currentState = INITIAL_STATE, action) => {
           return {
             ...currentState,
             contacts:currentState.contacts,
-            contact:null,
+            contact: null,
             isFetching: true,
             error: null,
             successMsg:null,
@@ -194,19 +206,17 @@ const contactReducer = (currentState = INITIAL_STATE, action) => {
             contactToDelete: null,
             showEditModal: true,
             contactToEdit: action.contact,
-            newTodo: null,
             showSuccessMessage: false,
             showErrorMessage: false
           }
     case 'EDIT_CONTACT_SUCCESS':
           const updatedContacts = currentState.contacts.map((contact) => {
            if(contact.id !== action.contact.id){
-             //This is not the item we care about, keep it as is
              return contact;
            }
-           //Otherwise, this is the one we want to return an updated value
            return { ...contact, ...action.contact }
          })
+
           return {
             ...currentState,
             contacts:updatedContacts,
@@ -218,7 +228,6 @@ const contactReducer = (currentState = INITIAL_STATE, action) => {
             contactToDelete: null,
             showEditModal: true,
             contactToEdit: action.contact,
-            newTodo: null,
             showSuccessMessage: true,
             showErrorMessage: false
           }
@@ -234,10 +243,14 @@ const contactReducer = (currentState = INITIAL_STATE, action) => {
             contactToDelete: null,
             showEditModal: true,
             contactToEdit: currentState.contactToEdit,
-            newTodo: null,
             showSuccessMessage: false,
             showErrorMessage: true
           }
+
+          /*
+          * Delete States
+          */
+
       case 'SHOW_DELETE_MODAL':
           return {
             ...currentState,
@@ -250,7 +263,6 @@ const contactReducer = (currentState = INITIAL_STATE, action) => {
             contactToDelete: action.contact,
             showEditModal: false,
             contactToEdit: null,
-            newTodo: null,
             showSuccessMessage: false,
             showErrorMessage: false
           }
@@ -266,7 +278,6 @@ const contactReducer = (currentState = INITIAL_STATE, action) => {
             contactToDelete: null,
             showEditModal: false,
             contactToEdit: null,
-            newTodo: null,
             showSuccessMessage: false,
             showErrorMessage: false
           }
@@ -282,7 +293,6 @@ const contactReducer = (currentState = INITIAL_STATE, action) => {
             contactToDelete: action.contact,
             showEditModal: false,
             contactToEdit: null,
-            newTodo: null,
             showSuccessMessage: false,
             showErrorMessage: false
           }
@@ -299,7 +309,6 @@ const contactReducer = (currentState = INITIAL_STATE, action) => {
             contactToDelete: action.contact,
             showEditModal: false,
             contactToEdit: null,
-            newTodo: null,
             showSuccessMessage: false,
             showErrorMessage: false
           }
@@ -315,7 +324,6 @@ const contactReducer = (currentState = INITIAL_STATE, action) => {
             contactToDelete: action.contact,
             showEditModal: false,
             contactToEdit: null,
-            newTodo: null,
             showSuccessMessage: false,
             showErrorMessage: true
           }

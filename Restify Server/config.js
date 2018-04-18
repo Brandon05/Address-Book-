@@ -1,7 +1,7 @@
 'use strict'
- 
+
 var mysql = require('mysql');
- 
+
 module.exports = {
     name: 'rest-api',
     hostname : 'http://localhost',
@@ -12,7 +12,7 @@ module.exports = {
         get : mysql.createConnection({
 			host     : 'localhost',
 			user     : 'root',
-			password : 'Bsanch0230',
+			password : '',
 			database : 'contacts'
 		})
     }
